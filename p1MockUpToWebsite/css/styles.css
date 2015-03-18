@@ -1,0 +1,48 @@
+/** {
+    border: 1px solid red !important;
+}*/
+body{
+	/*font: 'Lato', sans-serif 300;*/
+	font-family: 'Lato', sans-serif;
+	color: rgba(52, 51, 51, 0.87);
+	font-weight: 300;
+}
+
+.text-muted{
+	color: #bcbbbb;
+}
+
+.text-thin{
+	font-weight: 100;
+}
+
+.text-thick{
+	font-weight: 900;
+}
+
+.text-small{
+	font-size: 27px;
+}
+
+.text-medium{
+	font-size: 40px;
+}
+
+.text-large{
+	font-size: 70px;
+}
+
+.text-spacing{
+	letter-spacing: .05em;
+}
+
+.img-centered{
+	margin-left: auto;
+    margin-right: auto;
+}
+
+hr{
+	height: 5px;
+  	background-color: rgba(155, 146, 139, 0.98);
+  	width: 100%;
+}
