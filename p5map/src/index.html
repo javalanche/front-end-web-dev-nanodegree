@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Neighborhood Map</title>
+    <!-- build:css -->
+      <link href="bower_modules/components-bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/styles.css" rel="stylesheet">
+    <!-- endbuild -->
+    <!-- build:js -->
+      <script src="app/require.config.js"></script>
+      <script data-main="app/startup" src="bower_modules/requirejs/require.js"></script>
+    <!-- endbuild -->
+		<script type="text/javascript"
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4vOYgfW1LNBosqKl79x3DkGgjapH67PU">
+		</script>
+		<script type="text/javascript">
+		</script>
+  </head>
+  <body>
+    <nav-bar params="route: route"></nav-bar>
+    <div id="page" class="container" data-bind="component: { name: route().page, params: route }"></div>
+		<div id="test" class=test"></div>
+  </body>
+</html>
