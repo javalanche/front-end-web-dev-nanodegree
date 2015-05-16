@@ -22,18 +22,24 @@ var Initialize = function (e) {
 	  new google.maps.LatLng(32.7474, 263.2631));
   map.fitBounds(defaultBounds);
 
+// //Knockout js implementation
+// 	// Create the search box and link it to the UI element.
+// 	this.input = /** @type {HTMLInputElement} */ (ko.observable("sushi"));
+// 	console.log(this.input());
+// 	map.controls[google.maps.ControlPosition.TOP_LEFT].push(self.input());
 
-	// Create the search box and link it to the UI element.
-	this.input = /** @type {HTMLInputElement} */ (ko.observable("test"));
-	//var input = [>* @type {HTMLInputElement} <](
-		//document.getElementById('pac-input'));
-	console.log(this.input);
-	map.controls[google.maps.ControlPosition.TOP_LEFT].push(self.input);
+// 	var searchBox = new google.maps.places.SearchBox(
+		// /** @type {HTMLInputElement} */(self.input()));
 
-	var searchBox = new google.maps.places.SearchBox(
-		/** @type {HTMLInputElement} */(self.input));
+//From Goog Documentation vanilla js implementation
+   // Create the search box and link it to the UI element.
+  var input = /** @type {HTMLInputElement} */(
+      document.getElementById('pac-input'));
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-  // [START region_getplaces]
+  var searchBox = new google.maps.places.SearchBox(
+    /** @type {HTMLInputElement} */(input));
+
   // Listen for the event fired when the user selects an item from the
   // pick list. Retrieve the matching places for that item.
   google.maps.event.addListener(searchBox, 'places_changed', function() {
