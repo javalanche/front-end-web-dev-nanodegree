@@ -15,75 +15,155 @@ body {
 .header,
 .marketing,
 .footer {
-  padding-left: 15px;
-  padding-right: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
 }
 
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
+	margin-top: 0;
+	margin-bottom: 0;
+	line-height: 40px;
+	padding-bottom: 19px;
 }
 
 /* Custom page footer */
 .footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
+	padding-top: 19px;
+	color: #777;
+	border-top: 1px solid #e5e5e5;
 }
 
 .container-narrow > hr {
-  margin: 30px 0;
+	margin: 30px 0;
 }
 
 /* Main marketing message and sign up button */
 .jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
+	text-align: center;
+	border-bottom: 1px solid #e5e5e5;
 }
 
 .jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
+	font-size: 21px;
+	padding: 14px 24px;
 }
 
 /* Supporting marketing content */
 .marketing {
-  margin: 40px 0;
+	margin: 40px 0;
 }
 
 .marketing p + h4 {
-  margin-top: 28px;
+	margin-top: 28px;
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
+	.container {
+		max-width: 730px;
+	}
 
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
+	/* Remove the padding we set earlier */
+	.header,
+	.marketing,
+	.footer {
+		padding-left: 0;
+		padding-right: 0;
+	}
 
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
+	/* Space out the masthead */
+	.header {
+		margin-bottom: 30px;
+	}
 
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
+	/* Remove the bottom border on the jumbotron for visual effect */
+	.jumbotron {
+		border-bottom: 0;
+	}
 }
+#pac-input {
+	background-color: #fff;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	margin-left: 12px;
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	width: 400px;
+}
+
+#pac-input:focus {
+	border-color: #4d90fe;
+}
+div[style="transform: translateZ(0px)"]{
+	background: yellow;
+	left: -24px;
+}
+[style="transform: translateZ(0px)"] {
+	background: yellow;
+}
+
+#results {
+	font-family: Arial, Helvetica, sans-serif;
+	position: absolute;
+	right: 5px;
+	top: 50%;
+	margin-top: -195px;
+	height: 380px;
+	width: 200px;
+	padding: 5px;
+	z-index: 5;
+	border: 1px solid #999;
+	background: #fff;
+	display: none;
+}
+h2 {
+	font-size: 22px;
+	margin: 0 0 5px 0;
+}
+#places {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	height: 321px;
+	width: 193px;
+	overflow-y: scroll;
+}
+#places > li {
+	background-color: #f1f1f1;
+	padding: 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+#places > li:nth-child(odd) {
+	background-color: #fcfcfc;
+}
+#more {
+	width: 106%;
+	margin: -8px 0 0 -5px;
+}
+/*
+ *yelp api
+ */
+html, body {width: 100%; height: 100%; font-family: arial;}  
+/*body {margin:0;padding 0;overflow: hidden;}*/
+#mapContainer {padding-top: 50px;}
+#map, #mapContainer {width:100%; height: 100%;}
+#top {position:absolute; top:0; left:0; width: 100%; height: 50px; line-height: 50px;}
+#spinner { visibility: hidden; margin-left:3px;}
+#poweredby, #searchbox {line-height: 50px;}
+#searchbox {text-align: center;}
+#poweredby { float: right; margin-right: 3px;}
+#poweredby img { vertical-align: baseline;}
+.marker {font-size: 11px;}
+.marker .businessimage { float: left;}
+.marker .ratingsimage {vertical-align:middle; margin-top:0px;}
+.marker .businessinfo { margin-left: 110px;}
+#googleMap { height: 100%; margin: 0; padding: 0;}
