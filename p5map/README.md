@@ -2,7 +2,9 @@
 
 to start project run in command line:
 >npm install
+
 >bower install
+
 >grunt serve
 
 
