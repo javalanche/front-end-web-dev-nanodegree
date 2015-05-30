@@ -335,11 +335,7 @@ var overlays = [];
          infowindow.open(map, context);
          // infowindow.open(map, markerNew);
        }
-       google.maps.event.addListener(markerNew, "click", function() {
-         markerNew.InfoWindowHtml(infoWindowHtml, {maxWidth:400});
-       });
     }
 
 //start everything
-var test = "test";
 ko.applyBindings(new ViewModel());
