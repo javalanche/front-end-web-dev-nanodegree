@@ -1,72 +1,66 @@
 "use strict";
 var map;
+var currentMarkerPosition;
+var currentSelectedItem;
+var count = 0;
+var context;
+	var markers = [];
 var ViewModel = function (e) {
-	google.maps.event.addDomListener(window, 'load', Initialize(e));
-	//this.menuModel = [
-	//{map: "map1"},
-	//{map: "map2"},
-	//{map: "map3"}
-	//];
-	this.currentMap = ko.observable(new Initialize());
+  google.maps.event.addDomListener(window, 'load', Initialize(e));
+
+  this.currentMap = ko.observable(new Initialize());
+  this.input = (ko.observable("Enter your city or address"));
 }
 var Initialize = function (e) {
-	var self = this;
-	var YWSID = "tuoehBb1CHssBRwmS1Wt1Q"; // common required parameter (api key)
-	var icon = null;
+  var self = this;
+  var YWSID = "tuoehBb1CHssBRwmS1Wt1Q"; // common required parameter (api key)
+  var icon = null;
 
-	var placesList = document.getElementById('places');
-	var resultsId = document.getElementById('results');
+  var placesList = document.getElementById('places');
+  var resultsId = document.getElementById('results');
+    var yelp_box = document.getElementById('yelp-box');
 
-	//setup for map
-	var mapProp = {
-		mapTypeId:google.maps.MapTypeId.ROADMAP
-	};
-	var markers = [];
+  //setup for map
+  var mapProp = {
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
 	map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
 	var defaultBounds = new google.maps.LatLngBounds(
 		new google.maps.LatLng(32.7902, 263.1759),
 		new google.maps.LatLng(32.7474, 263.2631));
 		map.fitBounds(defaultBounds);
 
-		// //Knockout js implementation
-		//  var input = /** @type {HTMLInputElement} */ (ko.observable("sushi"));
-		//    console.log("input: ", input);
-		//  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input());
-		//    console.log("second one: ", map.controls[google.maps.ControlPosition.TOP_LEFT].push(input));
-		//  var searchBox = new google.maps.places.SearchBox(
-		//     /** @type {HTMLInputElement} */(input()));
-		// console.log("searchBox: ", searchBox);
-
-		//  // Create the search box and link it to the UI element.
-		//  this.input = /** @type {HTMLInputElement} */ (ko.observable("sushi"));
-		//  console.log(this.input());
-		//  map.controls[google.maps.ControlPosition.TOP_LEFT].push(self.input());
-		//  var searchBox = new google.maps.places.SearchBox(
-		// /** @type {HTMLInputElement} */(self.input()));
 
 		//From Goog Documentation vanilla js implementation
 		// Create the search box and link it to the UI element.
 		var input = /** @type {HTMLInputElement} */(document.getElementById('pac-input'));
-		console.log("input: ", input);
 		map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-		console.log("second one: ", map.controls[google.maps.ControlPosition.TOP_LEFT].push(input));
+
 		var searchBox = new google.maps.places.SearchBox(
 			/** @type {HTMLInputElement} */(input));
-			console.log("searchBox: ", searchBox);
 
 			// Listen for the event fired when the user selects an item from the
 			// pick list. Retrieve the matching places for that item.
 			google.maps.event.addListener(searchBox, 'places_changed', function() {
+        count++;
+
+     while(overlays[0])
+      {
+        overlays.pop().setMap(null);
+      }
+     
 				var places = searchBox.getPlaces();
 
 				while ( placesList.firstChild ) {
 					placesList.removeChild( placesList.firstChild );
+        }
 					resultsId.style.display = "none";
-				}
+          yelp_box.style.display = "none";
 
 				if (places.length == 0) {
 					return;
 				}
+        console.log(count, " markers: ", markers);
 				for (var i = 0, marker; marker = markers[i]; i++) {
 					marker.setMap(null);
 				}
@@ -97,28 +91,39 @@ var Initialize = function (e) {
 
 					var infowindow = new google.maps.InfoWindow();
 					var x = place.name;
-					//var y = place.geometry.location;
-					//console.log(y);
-					//console.log(marker);
-					google.maps.event.addListener(marker, 'click', (function(nameCopy) {
+          var y = place.geometry.location;
+
+         
+					google.maps.event.addListener(marker, 'click', (function(nameCopy, positionCopy) {
 						return function(){
-							infowindow.setContent("<a>"+nameCopy+"</a>");
-							//console.log(this);
-							infowindow.open(map, this);
-							cssHack(nameCopy);
-							updateMap();
+              // count++;
+              currentMarkerPosition = positionCopy;
+              yelp_box.style.display = "none";
+              document.getElementById("yelp-box").innerHTML = "";
+              updateMap(nameCopy);
+
+              currentSelectedItem = nameCopy;
+              context = this;
+
+                  if (infowindow) {
+                        infowindow.close();
+                    }
+              infowindow.setContent("<a>"+nameCopy+"</a>");
+              infowindow.open(map, this);
+              cssHack(nameCopy);
 						};
-					})(x));
+					})(x, y));
+
+
+
 
 					if (places.length > 1) {
 						placesList.innerHTML += '<li><a>' + place.name + '</a></li>';
 						resultsId.style.display = "block";
-					}
+          }
 
 				}
 				function cssHack(nameCopy) {
-					//console.log(nameCopy);
-					//$("a:contains(" + nameCopy + ")").attr("style","color: red");
 					$("a:contains(" + nameCopy + ")").closest('div[style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"').css({"left": "-23px"});
 				}
 
@@ -143,42 +148,30 @@ var icon = null;
  * to instantiate it.
  */
  function load() {
-   //map = new GMap2(document.getElementById("map"));
-  console.log("SECOND: ", map);
+
    GEvent.addListener(map, "load", function() {updateMap();});    
-   //map.setCenter(new GLatLng(37.7916,-122.4418),13);
-   //map.addControl(new GLargeMapControl());
-   //map.addControl(new GMapTypeControl());
-   //map.setMapType(G_HYBRID_MAP);
+
 
    if (window.attachEvent) window.attachEvent("onresize", function() { map.checkResize()} );
    else if (window.addEventListener) window.addEventListener("resize", function() { map.checkResize()}, false);
 
-   // setup our marker icon
-   //icon = new GIcon();
-   //icon.image = "images/marker_star.png";
-   //icon.shadow = "images/marker_shadow.png";
-   //icon.iconSize = new GSize(20, 29);
-   //icon.shadowSize = new GSize(38, 29);
-   //icon.iconAnchor = new GPoint(15, 29);
-   //icon.infoWindowAnchor = new GPoint(15, 3);
  }
 
  /*
   * Construct the URL to call for the API request
   */
-  function constructYelpURL() {
-  console.log("SECOND: ", map);
+  function constructYelpURL(input) {
+  
     var mapBounds = map.getBounds();
     var URL = "http://api.yelp.com/" +
       "business_review_search?"+
       "callback=" + "handleResults" +
-      "&term=" + document.getElementById("term").value + 
+      "&term=" + input + 
       "&num_biz_requested=10" +
       "&tl_lat=" + mapBounds.getSouthWest().lat() +
-      "&tl_long=" + mapBounds.getSouthWest().lng() + 
+      "&tl_long=" + mapBounds.getSouthWest().lng() +
       "&br_lat=" + mapBounds.getNorthEast().lat() + 
-      "&br_long=" + mapBounds.getNorthEast().lng() +
+      "&br_long=" + mapBounds.getNorthEast().lng() +      
       "&ywsid=" + YWSID;
     return encodeURI(URL);
   }
@@ -187,18 +180,15 @@ var icon = null;
    * Called on the form submission: updates the map by
    * placing markers on it at the appropriate places
    */
-   function updateMap() {
-     // turn on spinner animation
-     //document.getElementById("spinner").style.visibility = 'visible';
+   function updateMap(e) {
 
-     var yelpRequestURL = constructYelpURL();
+     var yelpRequestURL = constructYelpURL(e);
 
      /* clear existing markers */
-     // map.clearOverlays();
      while(overlays[0])
-{
-  overlays.pop().setMap(null);
-}
+      {
+        overlays.pop().setMap(null);
+      }
 
      /* do the api request */
      var script = document.createElement('script');
@@ -214,8 +204,7 @@ var icon = null;
   * markers on the map.  If not, display an error.
   */
   function handleResults(data) {
-    // turn off spinner animation
-    //document.getElementById("spinner").style.visibility = 'hidden';
+
     if(data.message.text == "OK") {
       if (data.businesses.length == 0) {
         alert("Error: No businesses were found near that location");
@@ -223,11 +212,11 @@ var icon = null;
       }
       for(var i=0; i<data.businesses.length; i++) {
         var biz = data.businesses[i];
-        createMarker(biz, new google.maps.LatLng(biz.latitude, biz.longitude), i);
+        createMarker(biz, new google.maps.LatLng(currentMarkerPosition.A, currentMarkerPosition.F), i);
       }
     }
     else {
-      alert("Error: " + data.message.text);
+      alert("Yelp error: " + data.message.text);
     }
   }
 
@@ -268,6 +257,7 @@ var icon = null;
      text += '<br/><a href="'+biz.url+'" target="_blank">Read the reviews »</a><br/>';
      // div end
      text += '</div></div>'
+     // console.log(count, " text: ", text);
      return text;
    }
 
@@ -313,6 +303,9 @@ var overlays = [];
        var self = this;
        var infoWindowHtml = generateInfoWindowHtml(biz)
        var markerNew = new google.maps.Marker(point, null);
+      // var markerNew = new google.maps.Marker({
+      //   position: currentMarkerPosition
+      // });
        var infoStr = 'hello';
        var infowindow =
          new google.maps.InfoWindow({
@@ -322,21 +315,30 @@ var overlays = [];
          });
          overlays.push(markerNew);
 
-       console.log(markerNew);
-       markerNew.setMap(map);
-       //map.addOverlay(markerNew);
+
+       // automatically open first markerNew
+      if (markerNum == 0){
+        var yelp_box = document.getElementById("yelp-box");
+        yelp_box.innerHTML = infoWindowHtml;
+        yelp_box.style.display = "block";
+
+       }
        google.maps.event.addListener(markerNew, "click", function() {
          markerNew.InfoWindowHtml(infoWindowHtml, {maxWidth:400});
        });
-       // automatically open first markerNew
-       if (markerNum == 0){
-         console.log("markerNew: ", markerNew);
-         console.log("infoWindowHtml: ", infoWindowHtml);
-         infowindow.open(map, markerNew);
-         //markerNew.InfoWindowHtml(infoWindowHtml, {maxWidth:400});
-       }
-     }
 
+     }
+    function placeMarker(markerNew, markerNum, infoWindowHtmli, infowindow){
+
+       if (markerNum == 0){
+
+         infowindow.open(map, context);
+         // infowindow.open(map, markerNew);
+       }
+       google.maps.event.addListener(markerNew, "click", function() {
+         markerNew.InfoWindowHtml(infoWindowHtml, {maxWidth:400});
+       });
+    }
 
 //start everything
 var test = "test";

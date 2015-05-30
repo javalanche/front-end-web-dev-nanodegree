@@ -123,6 +123,20 @@ div[style="transform: translateZ(0px)"]{
 	background: #fff;
 	display: none;
 }
+#yelp-box {
+	font-family: Arial, Helvetica, sans-serif;
+	position: absolute;
+	right: 5px;
+	top: 50%;
+	margin-top: -365px;
+	height: 170px;
+	width: 369px;
+	padding: 5px;
+	z-index: 5;
+	border: 1px solid #999;
+	background: #fff;
+	display: none;
+}
 h2 {
 	font-size: 22px;
 	margin: 0 0 5px 0;

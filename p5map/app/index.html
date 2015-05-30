@@ -35,15 +35,13 @@
 			<![endif]-->
 
 
-<div class="container">
+<!-- <div class="container">
 	<div class="header">
-		<!--<ul class="nav nav-pills pull-right" data-bind="foreach: menuModel">-->
-			<!--<li><a href="#" data-bind="text: map"></a></li>-->
-		<!--</ul>-->
+
 		<h3 class="text-muted">Neighborhood Map</h3>
 	</div>
 
-</div>
+</div> -->
 
 <!--
    -[>old template for map.js<]
@@ -61,13 +59,15 @@
 
 
 <!-- templat for main.js, knockout implementation   -->
-<form>
+<!-- <form>
 		Search for <input type="text" id="term" name="term" value="sushi"/> <input type="button" value="Search" />
-</form>
+</form> -->
 <!--<input id="pac-input" class="controls" type="text" placeholder="Enter your city or address">-->
 <!-- <input id="pac-input" class="controls" data-bind="textInput: currentMap().input"> -->
-<input id="pac-input" class="controls" type="text" placeholder="Enter your city or address" data-bind="textInput: Initialize.input">
+<input id="pac-input" class="controls" type="text" placeholder="Enter your city or address" data-bind="textInput: input">
+<!-- <input id="pac-input" class="controls" data-bind="textInput: input"> -->
 <div id="googleMap"></div>
+<div id="yelp-box" class="controls"></div>
 <div id="results">
 	<h2>Results</h2>
 	<ul id="places"></ul>
