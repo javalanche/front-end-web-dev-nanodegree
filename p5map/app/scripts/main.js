@@ -328,14 +328,7 @@ var overlays = [];
        });
 
      }
-    function placeMarker(markerNew, markerNum, infoWindowHtmli, infowindow){
 
-       if (markerNum == 0){
-
-         infowindow.open(map, context);
-         // infowindow.open(map, markerNew);
-       }
-    }
 
 //start everything
 ko.applyBindings(new ViewModel());
