@@ -73,7 +73,9 @@ function formatCategories(cats) {
 	var s = 'Categories: ';
 	for(var i=0; i<cats.length; i++) {
 		s+= cats[i].name;
-		if(i !== cats.length-1) s += ', ';
+		if(i !== cats.length-1) {
+      s += ', ';
+    }
 	}
 	s += '<br/>';
 	return s;
@@ -86,7 +88,9 @@ function formatNeighborhoods(neighborhoods) {
 	var s = 'Neighborhoods: ';
 	for(var i=0; i<neighborhoods.length; i++) {
 		s += '<a href="' + neighborhoods[i].url + '" target="_blank">' + neighborhoods[i].name + '</a>';
-		if (i !== neighborhoods.length-1) s += ', ';
+		if (i !== neighborhoods.length-1) {
+      s += ', ';
+    }
 	}
 	s += '<br/>';
 	return s;
@@ -96,7 +100,9 @@ function formatNeighborhoods(neighborhoods) {
  * Formats the phone number HTML
  */
 function formatPhoneNumber(num) {
-	if(num.length != 10) return '';
+	if(num.length !== 10) {
+    return '';
+  }
 	return '(' + num.slice(0,3) + ') ' + num.slice(3,6) + '-' + num.slice(6,10) + '<br/>';
 }
 
@@ -138,17 +144,17 @@ function generateInfoWindowHtml(biz) {
 	text += formatCategories(biz.categories);
 	// neighborhoods
 	if(biz.neighborhoods.length)
-		text += formatNeighborhoods(biz.neighborhoods);
+		{text += formatNeighborhoods(biz.neighborhoods);}
 	// address
 	text += biz.address1 + '<br/>';
 	// address2
 	if(biz.address2.length) 
-		text += biz.address2+ '<br/>';
+		{text += biz.address2+ '<br/>';}
 	// city, state and zip
 	text += biz.city + ',&nbsp;' + biz.state + '&nbsp;' + biz.zip + '<br/>';
 	// phone number
 	if(biz.phone.length)
-		text += formatPhoneNumber(biz.phone);
+		{text += formatPhoneNumber(biz.phone);}
 	// Read the reviews
 	text += '<br/><a href="'+biz.url+'" target="_blank">Read the reviews »</a><br/>';
 	// div end
@@ -168,8 +174,12 @@ function load() {
 	GEvent.addListener(map, 'load', function() {updateMap();});    
 
 
-	if (window.attachEvent) window.attachEvent('onresize', function() { map.checkResize()} );
-	else if (window.addEventListener) window.addEventListener('resize', function() { map.checkResize()}, false);
+	if (window.attachEvent) {
+    window.attachEvent('onresize', function() { map.checkResize();} );
+}
+	else if (window.addEventListener) {
+    window.addEventListener('resize', function() { map.checkResize();}, false);
+}
 
 }
 
