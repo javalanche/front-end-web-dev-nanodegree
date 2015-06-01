@@ -32,8 +32,8 @@ function updateMap(e) {
  */
 function handleResults(data) {
 
-	if(data.message.text == 'OK') {
-		if (data.businesses.length == 0) {
+	if(data.message.text === 'OK') {
+		if (data.businesses.length === 0) {
 			alert('Yelp Error: No businesses were found in Yelp near that location');
 			return;
 		}
@@ -73,7 +73,7 @@ function formatCategories(cats) {
 	var s = 'Categories: ';
 	for(var i=0; i<cats.length; i++) {
 		s+= cats[i].name;
-		if(i != cats.length-1) s += ', ';
+		if(i !== cats.length-1) s += ', ';
 	}
 	s += '<br/>';
 	return s;
@@ -86,7 +86,7 @@ function formatNeighborhoods(neighborhoods) {
 	var s = 'Neighborhoods: ';
 	for(var i=0; i<neighborhoods.length; i++) {
 		s += '<a href="' + neighborhoods[i].url + '" target="_blank">' + neighborhoods[i].name + '</a>';
-		if (i != neighborhoods.length-1) s += ', ';
+		if (i !== neighborhoods.length-1) s += ', ';
 	}
 	s += '<br/>';
 	return s;
@@ -109,7 +109,7 @@ function createMarker(biz, point, markerNum) {
 
 
 	// automatically open first markerNew
-	if (markerNum == 0){
+	if (markerNum === 0){
 		var yelp_box = document.getElementById('yelp-box');
 		yelp_box.innerHTML = infoWindowHtml;
 		yelp_box.style.display = 'block';
@@ -214,7 +214,7 @@ var Initialize = function (e) {
 				resultsId.style.display = 'none';
 				yelp_box.style.display = 'none';
 
-				if (places.length == 0) {
+				if (places.length === 0) {
 					return;
 				}
 				console.log(count, ' markers: ', markers);
