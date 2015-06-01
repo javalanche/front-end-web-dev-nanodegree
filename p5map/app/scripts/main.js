@@ -116,9 +116,9 @@ function createMarker(biz, point, markerNum) {
 
 	// automatically open first markerNew
 	if (markerNum === 0){
-		var yelp_box = document.getElementById('yelp-box');
-		yelp_box.innerHTML = infoWindowHtml;
-		yelp_box.style.display = 'block';
+		var yelpBox = document.getElementById('yelp-box');
+		yelpBox.innerHTML = infoWindowHtml;
+		yelpBox.style.display = 'block';
 
 	}
 }
@@ -189,7 +189,7 @@ var Initialize = function (e) {
 
 	var placesList = document.getElementById('places');
 	var resultsId = document.getElementById('results');
-	var yelp_box = document.getElementById('yelp-box');
+	var yelpBox = document.getElementById('yelp-box');
 
 	//setup for map
 	var mapProp = {
@@ -222,7 +222,7 @@ var Initialize = function (e) {
 					placesList.removeChild( placesList.firstChild );
 				}
 				resultsId.style.display = 'none';
-				yelp_box.style.display = 'none';
+				yelpBox.style.display = 'none';
 
 				if (places.length === 0) {
 					return;
@@ -265,7 +265,7 @@ var Initialize = function (e) {
 						return function(){
 							// count++;
 							currentMarkerPosition = positionCopy;
-							yelp_box.style.display = 'none';
+							yelpBox.style.display = 'none';
 							document.getElementById('yelp-box').innerHTML = '';
 							updateMap(nameCopy);
 
