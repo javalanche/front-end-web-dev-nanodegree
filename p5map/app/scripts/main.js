@@ -186,7 +186,7 @@ function load() {
 
 }
 
-var Initialize = function (e) {
+var Initialize = function () {
 
 	// var icon = null;
 
@@ -311,8 +311,8 @@ var Initialize = function (e) {
 			});
 };
 
-var ViewModel = function (e) {
-	google.maps.event.addDomListener(window, 'load', new Initialize(e));
+var ViewModel = function () {
+	google.maps.event.addDomListener(window, 'load', new Initialize());
 
 	this.currentMap = ko.observable(new Initialize());
 	this.input = (ko.observable('Enter your city or address'));
