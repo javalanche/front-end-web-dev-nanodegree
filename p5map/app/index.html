@@ -18,16 +18,10 @@
 		<style type="text/css">
 			html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
 		</style>
-		<!--<script src="http://maps.google.com/maps?file=api&amp;v=3&amp;key=AIzaSyA4vOYgfW1LNBosqKl79x3DkGgjapH67PU" type="text/javascript"></script>-->
-		<!--<script type="text/javascript" charset="utf-8" -->
-				<!--src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4vOYgfW1LNBosqKl79x3DkGgjapH67PU">-->
-		<!--</script>-->
 
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
-		<!--<script src="./scripts/map.js" type="text/javascript" charset="utf-8"></script>-->
-		<script src="./scripts/main.js" type="text/javascript" charset="utf-8"></script>
 
-		<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4vOYgfW1LNBosqKl79x3DkGgjapH67PU" type="text/javascript" charset="utf-8"></script>-->
+
   </head>
 <body>
 		<!--[if lt IE 10]>
@@ -35,35 +29,6 @@
 			<![endif]-->
 
 
-<!-- <div class="container">
-	<div class="header">
-
-		<h3 class="text-muted">Neighborhood Map</h3>
-	</div>
-
-</div> -->
-
-<!--
-   -[>old template for map.js<]
-   -<form>
-	 -    Search for <input type="text" id="term" name="term" value="sushi"/> <input type="button" value="Search" />
-   -</form>
-   -<input id="pac-input" class="controls" type="text" placeholder="Enter your city or address">
-   -<div id="map-canvas"></div>
-   -<div id="results">
-	 -  <h2>Results</h2>
-	 -  <ul id="places"></ul>
-	 -  <button id="more">More results</button>
-   -</div>
-	 -->
-
-
-<!-- templat for main.js, knockout implementation   -->
-<!-- <form>
-		Search for <input type="text" id="term" name="term" value="sushi"/> <input type="button" value="Search" />
-</form> -->
-<!--<input id="pac-input" class="controls" type="text" placeholder="Enter your city or address">-->
-<!-- <input id="pac-input" class="controls" data-bind="textInput: currentMap().input"> -->
 <input id="pac-input" class="controls" type="text" placeholder="Enter your city or address" data-bind="textInput: input">
 <!-- <input id="pac-input" class="controls" data-bind="textInput: input"> -->
 <div id="googleMap"></div>

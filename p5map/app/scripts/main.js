@@ -8,9 +8,6 @@ var YWSID = 'tuoehBb1CHssBRwmS1Wt1Q'; // common required parameter (api key)
 var markers = [];
 
 
-
-
-
 /*
  * Construct the URL to call for the API request
  */
@@ -38,8 +35,8 @@ function formatCategories(cats) {
 	for(var i=0; i<cats.length; i++) {
 		s+= cats[i].name;
 		if(i !== cats.length-1) {
-      s += ', ';
-    }
+			s += ', ';
+		}
 	}
 	s += '<br/>';
 	return s;
@@ -53,8 +50,8 @@ function formatNeighborhoods(neighborhoods) {
 	for(var i=0; i<neighborhoods.length; i++) {
 		s += '<a href="' + neighborhoods[i].url + '" target="_blank">' + neighborhoods[i].name + '</a>';
 		if (i !== neighborhoods.length-1) {
-      s += ', ';
-    }
+			s += ', ';
+		}
 	}
 	s += '<br/>';
 	return s;
@@ -65,8 +62,8 @@ function formatNeighborhoods(neighborhoods) {
  */
 function formatPhoneNumber(num) {
 	if(num.length !== 10) {
-    return '';
-  }
+		return '';
+	}
 	return '(' + num.slice(0,3) + ') ' + num.slice(3,6) + '-' + num.slice(6,10) + '<br/>';
 }
 
@@ -117,16 +114,15 @@ function generateInfoWindowHtml(biz) {
  */
 function createMarker(biz, point, markerNum) {
 
-  var infoWindowHtml = generateInfoWindowHtml(biz);
+	var infoWindowHtml = generateInfoWindowHtml(biz);
 
+	// automatically open first markerNew
+	if (markerNum === 0){
+		var yelpBox = document.getElementById('yelp-box');
+		yelpBox.innerHTML = infoWindowHtml;
+		yelpBox.style.display = 'block';
 
-  // automatically open first markerNew
-  if (markerNum === 0){
-    var yelpBox = document.getElementById('yelp-box');
-    yelpBox.innerHTML = infoWindowHtml;
-    yelpBox.style.display = 'block';
-
-  }
+	}
 }
 
 /*
@@ -135,19 +131,19 @@ function createMarker(biz, point, markerNum) {
  */
 function handleResults(data) {
 
-  if(data.message.text === 'OK') {
-    if (data.businesses.length === 0) {
-      alert('Yelp Error: No businesses were found in Yelp near that location');
-      return;
-    }
-    for(var i=0; i<data.businesses.length; i++) {
-      var biz = data.businesses[i];
-      createMarker(biz, new google.maps.LatLng(currentMarkerPosition.A, currentMarkerPosition.F), i);
-    }
-  }
-  else {
-    alert('Yelp error: ' + data.message.text);
-  }
+	if(data.message.text === 'OK') {
+		if (data.businesses.length === 0) {
+			alert('Yelp Error: No businesses were found in Yelp near that location');
+			return;
+		}
+		for(var i=0; i<data.businesses.length; i++) {
+			var biz = data.businesses[i];
+			createMarker(biz, new google.maps.LatLng(currentMarkerPosition.A, currentMarkerPosition.F), i);
+		}
+	}
+	else {
+		alert('Yelp error: ' + data.message.text);
+	}
 }
 
 /*
@@ -156,16 +152,16 @@ function handleResults(data) {
  */
 function updateMap(e) {
 
-  var yelpRequestURL = constructYelpURL(e);
+	var yelpRequestURL = constructYelpURL(e);
 
 
-  /* do the api request */
-  var script = document.createElement('script');
-  script.src = yelpRequestURL;
-  script.type = 'text/javascript';
-  var head = document.getElementsByTagName('head').item(0);
-  head.appendChild(script);
-  return false;
+	/* do the api request */
+	var script = document.createElement('script');
+	script.src = yelpRequestURL;
+	script.type = 'text/javascript';
+	var head = document.getElementsByTagName('head').item(0);
+	head.appendChild(script);
+	return false;
 }
 
 /*
@@ -178,17 +174,15 @@ function load() {
 
 
 	if (window.attachEvent) {
-    window.attachEvent('onresize', function() { map.checkResize();} );
-}
+		window.attachEvent('onresize', function() { map.checkResize();} );
+	}
 	else if (window.addEventListener) {
-    window.addEventListener('resize', function() { map.checkResize();}, false);
-}
+		window.addEventListener('resize', function() { map.checkResize();}, false);
+	}
 
 }
 
 var Initialize = function () {
-
-	// var icon = null;
 
 	var placesList = document.getElementById('places');
 	var resultsId = document.getElementById('results');
@@ -202,113 +196,105 @@ var Initialize = function () {
 	var defaultBounds = new google.maps.LatLngBounds(
 		new google.maps.LatLng(32.7902, 263.1759),
 		new google.maps.LatLng(32.7474, 263.2631));
-		map.fitBounds(defaultBounds);
+	map.fitBounds(defaultBounds);
 
+	//From Goog Documentation vanilla js implementation
+	// Create the search box and link it to the UI element.
+	var input = /** @type {HTMLInputElement} */(document.getElementById('pac-input'));
+	map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-		//From Goog Documentation vanilla js implementation
-		// Create the search box and link it to the UI element.
-		var input = /** @type {HTMLInputElement} */(document.getElementById('pac-input'));
-		map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+	var searchBox = new google.maps.places.SearchBox(
+		/** @type {HTMLInputElement} */(input));
 
-		var searchBox = new google.maps.places.SearchBox(
-			/** @type {HTMLInputElement} */(input));
+	// Listen for the event fired when the user selects an item from the
+	// pick list. Retrieve the matching places for that item.
+	google.maps.event.addListener(searchBox, 'places_changed', function() {
+		count++;
 
-			// Listen for the event fired when the user selects an item from the
-			// pick list. Retrieve the matching places for that item.
-			google.maps.event.addListener(searchBox, 'places_changed', function() {
-				count++;
+		var places = searchBox.getPlaces();
 
+		while ( placesList.firstChild ) {
+			placesList.removeChild( placesList.firstChild );
+		}
+		resultsId.style.display = 'none';
+		yelpBox.style.display = 'none';
 
-				var places = searchBox.getPlaces();
+		if (places.length === 0) {
+			return;
+		}
 
-				while ( placesList.firstChild ) {
-					placesList.removeChild( placesList.firstChild );
-				}
-				resultsId.style.display = 'none';
-				yelpBox.style.display = 'none';
+		for (var i = 0, marker; marker = markers[i]; i++) {
+			marker.setMap(null);
+		}
 
-				if (places.length === 0) {
-					return;
-				}
-				console.log(count, ' markers: ', markers);
-        // while(markers){
-  				for (var i = 0, marker; marker = markers[i]; i++) {
-  					marker.setMap(null);
-  				}
-        // }
+		// For each place, get the icon, place name, and location.
+		markers = [];
+		var bounds = new google.maps.LatLngBounds();
+		for (var i = 0, place; place = places[i]; i++) {
+			var image = {
+				url: place.icon,
+				size: new google.maps.Size(71, 71),
+				origin: new google.maps.Point(0, 0),
+				anchor: new google.maps.Point(17, 34),
+				scaledSize: new google.maps.Size(25, 25)
+			};
 
-				// For each place, get the icon, place name, and location.
-				markers = [];
-				var bounds = new google.maps.LatLngBounds();
-				for (var i = 0, place; place = places[i]; i++) {
-					var image = {
-						url: place.icon,
-						size: new google.maps.Size(71, 71),
-						origin: new google.maps.Point(0, 0),
-						anchor: new google.maps.Point(17, 34),
-						scaledSize: new google.maps.Size(25, 25)
-					};
+			// Create a marker for each place.
+			var marker = new google.maps.Marker({
+				map: map,
+				icon: image,
+				title: place.name,
+				position: place.geometry.location
+			});
 
-					// Create a marker for each place.
-					var marker = new google.maps.Marker({
-						map: map,
-						icon: image,
-						title: place.name,
-						position: place.geometry.location
-					});
+			markers.push(marker);
 
-					markers.push(marker);
+			bounds.extend(place.geometry.location);
 
-					bounds.extend(place.geometry.location);
+			var infowindow = new google.maps.InfoWindow();
+			var x = place.name;
+			var y = place.geometry.location;
 
-					var infowindow = new google.maps.InfoWindow();
-					var x = place.name;
-					var y = place.geometry.location;
+			google.maps.event.addListener(marker, 'click', (function(nameCopy, positionCopy) {
+				return function(){
+					// count++;
+					currentMarkerPosition = positionCopy;
+					yelpBox.style.display = 'none';
+					document.getElementById('yelp-box').innerHTML = '';
+					updateMap(nameCopy);
 
+					currentSelectedItem = nameCopy;
+					context = this;
 
-					google.maps.event.addListener(marker, 'click', (function(nameCopy, positionCopy) {
-						return function(){
-							// count++;
-							currentMarkerPosition = positionCopy;
-							yelpBox.style.display = 'none';
-							document.getElementById('yelp-box').innerHTML = '';
-							updateMap(nameCopy);
-
-							currentSelectedItem = nameCopy;
-							context = this;
-
-							if (infowindow) {
-								infowindow.close();
-							}
-							infowindow.setContent('<a>'+nameCopy+'</a>');
-							infowindow.open(map, this);
-							cssHack(nameCopy);
-						};
-					})(x, y));
-
-
-
-
-					if (places.length > 1) {
-						placesList.innerHTML += '<li><a>' + place.name + '</a></li>';
-						resultsId.style.display = 'block';
+					if (infowindow) {
+						infowindow.close();
 					}
+					infowindow.setContent('<a>'+nameCopy+'</a>');
+					infowindow.open(map, this);
+					cssHack(nameCopy);
+				};
+			})(x, y));
 
-				}
-				function cssHack(nameCopy) {
-					$('a:contains(' + nameCopy + ')').closest('div[style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"').css({'left': '-23px'});
-				}
+			if (places.length > 1) {
+				placesList.innerHTML += '<li><a>' + place.name + '</a></li>';
+				resultsId.style.display = 'block';
+			}
 
-				map.fitBounds(bounds);
-			});
-			// [END region_getplaces]
+		}
+		function cssHack(nameCopy) {
+			$('a:contains(' + nameCopy + ')').closest('div[style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"').css({'left': '-23px'});
+		}
 
-			// Bias the SearchBox results towards places that are within the bounds of the
-			// current map's viewport.
-			google.maps.event.addListener(map, 'bounds_changed', function() {
-				var bounds = map.getBounds();
-				searchBox.setBounds(bounds);
-			});
+		map.fitBounds(bounds);
+	});
+	// [END region_getplaces]
+
+	// Bias the SearchBox results towards places that are within the bounds of the
+	// current map's viewport.
+	google.maps.event.addListener(map, 'bounds_changed', function() {
+		var bounds = map.getBounds();
+		searchBox.setBounds(bounds);
+	});
 };
 
 var ViewModel = function () {
@@ -317,5 +303,6 @@ var ViewModel = function () {
 	this.currentMap = ko.observable(new Initialize());
 	this.input = (ko.observable('Enter your city or address'));
 };
+
 //start everything
 ko.applyBindings(new ViewModel());
