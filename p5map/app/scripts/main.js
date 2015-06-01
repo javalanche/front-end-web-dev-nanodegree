@@ -187,8 +187,8 @@ function load() {
 }
 
 var Initialize = function (e) {
-	var self = this;
-	var icon = null;
+
+	// var icon = null;
 
 	var placesList = document.getElementById('places');
 	var resultsId = document.getElementById('results');
