@@ -9,26 +9,7 @@ var markers = [];
 
 
 
-/*
- * If a sucessful API response is received, place
- * markers on the map.  If not, display an error.
- */
-function handleResults(data) {
 
-	if(data.message.text === 'OK') {
-		if (data.businesses.length === 0) {
-			alert('Yelp Error: No businesses were found in Yelp near that location');
-			return;
-		}
-		for(var i=0; i<data.businesses.length; i++) {
-			var biz = data.businesses[i];
-			createMarker(biz, new google.maps.LatLng(currentMarkerPosition.A, currentMarkerPosition.F), i);
-		}
-	}
-	else {
-		alert('Yelp error: ' + data.message.text);
-	}
-}
 
 /*
  * Construct the URL to call for the API request
@@ -89,22 +70,7 @@ function formatPhoneNumber(num) {
 	return '(' + num.slice(0,3) + ') ' + num.slice(3,6) + '-' + num.slice(6,10) + '<br/>';
 }
 
-/*
- * Creates a marker for the given business and point
- */
-function createMarker(biz, point, markerNum) {
 
-	var infoWindowHtml = generateInfoWindowHtml(biz);
-
-
-	// automatically open first markerNew
-	if (markerNum === 0){
-		var yelpBox = document.getElementById('yelp-box');
-		yelpBox.innerHTML = infoWindowHtml;
-		yelpBox.style.display = 'block';
-
-	}
-}
 /*
  * Formats and returns the Info Window HTML 
  * (displayed in a balloon when a marker is clicked)
@@ -144,6 +110,44 @@ function generateInfoWindowHtml(biz) {
 	text += '</div></div>';
 
 	return text;
+}
+
+/*
+ * Creates a marker for the given business and point
+ */
+function createMarker(biz, point, markerNum) {
+
+  var infoWindowHtml = generateInfoWindowHtml(biz);
+
+
+  // automatically open first markerNew
+  if (markerNum === 0){
+    var yelpBox = document.getElementById('yelp-box');
+    yelpBox.innerHTML = infoWindowHtml;
+    yelpBox.style.display = 'block';
+
+  }
+}
+
+/*
+ * If a sucessful API response is received, place
+ * markers on the map.  If not, display an error.
+ */
+function handleResults(data) {
+
+  if(data.message.text === 'OK') {
+    if (data.businesses.length === 0) {
+      alert('Yelp Error: No businesses were found in Yelp near that location');
+      return;
+    }
+    for(var i=0; i<data.businesses.length; i++) {
+      var biz = data.businesses[i];
+      createMarker(biz, new google.maps.LatLng(currentMarkerPosition.A, currentMarkerPosition.F), i);
+    }
+  }
+  else {
+    alert('Yelp error: ' + data.message.text);
+  }
 }
 
 /*
