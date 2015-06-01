@@ -2,7 +2,9 @@
   "name": "p5map",
   "private": true,
   "dependencies": {
-    "bootstrap": "~3.2.0",
     "knockout": "~3.3.0"
+  },
+  "devDependencies": {
+    "jquery": "~2.1.4"
   }
 }
