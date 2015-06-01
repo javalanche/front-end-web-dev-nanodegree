@@ -1,11 +1,10 @@
 'use strict';
 var map;
-var currentMarkerPosition;
-var currentSelectedItem;
-var count = 0;
-var context;
+var currentMarkerPosition; // set static position for Yelp box
+var currentSelectedItem; // info for Yelp box
+var count = 0; // debugging var
 var YWSID = 'tuoehBb1CHssBRwmS1Wt1Q'; // common required parameter (api key)
-var markers = [];
+var markers = []; // google maps api markers array for search results
 
 
 /*
@@ -165,23 +164,9 @@ function updateMap(e) {
 }
 
 /*
- * Creates the map object and calls setCenterAndBounds
- * to instantiate it.
+ * main initialization called from ViewModel below
+ * also hold the search and event listeners for google maps api
  */
-function load() {
-
-	GEvent.addListener(map, 'load', function() {updateMap();});    
-
-
-	if (window.attachEvent) {
-		window.attachEvent('onresize', function() { map.checkResize();} );
-	}
-	else if (window.addEventListener) {
-		window.addEventListener('resize', function() { map.checkResize();}, false);
-	}
-
-}
-
 var Initialize = function () {
 
 	var placesList = document.getElementById('places');
@@ -213,6 +198,7 @@ var Initialize = function () {
 
 		var places = searchBox.getPlaces();
 
+		// removes previous list items
 		while ( placesList.firstChild ) {
 			placesList.removeChild( placesList.firstChild );
 		}
@@ -223,6 +209,7 @@ var Initialize = function () {
 			return;
 		}
 
+		// removes previous markers
 		for (var i = 0, marker; marker = markers[i]; i++) {
 			marker.setMap(null);
 		}
@@ -264,7 +251,6 @@ var Initialize = function () {
 					updateMap(nameCopy);
 
 					currentSelectedItem = nameCopy;
-					context = this;
 
 					if (infowindow) {
 						infowindow.close();
@@ -275,12 +261,15 @@ var Initialize = function () {
 				};
 			})(x, y));
 
+			// places items in list view
 			if (places.length > 1) {
 				placesList.innerHTML += '<li><a>' + place.name + '</a></li>';
 				resultsId.style.display = 'block';
 			}
 
 		}
+
+		// need because google maps api infowindow has slightly missed placed
 		function cssHack(nameCopy) {
 			$('a:contains(' + nameCopy + ')').closest('div[style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"').css({'left': '-23px'});
 		}
@@ -298,9 +287,10 @@ var Initialize = function () {
 };
 
 var ViewModel = function () {
+	// calls the Initialize function to kick everything off
 	google.maps.event.addDomListener(window, 'load', new Initialize());
 
-	this.currentMap = ko.observable(new Initialize());
+	// observable for search input
 	this.input = (ko.observable('Enter your city or address'));
 };
 
