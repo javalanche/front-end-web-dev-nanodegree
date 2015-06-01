@@ -231,9 +231,11 @@ var Initialize = function (e) {
 					return;
 				}
 				console.log(count, ' markers: ', markers);
-				for (var i = 0, marker; marker = markers[i]; i++) {
-					marker.setMap(null);
-				}
+        // while(markers){
+  				for (var i = 0, marker; marker = markers[i]; i++) {
+  					marker.setMap(null);
+  				}
+        // }
 
 				// For each place, get the icon, place name, and location.
 				markers = [];
@@ -310,7 +312,7 @@ var Initialize = function (e) {
 };
 
 var ViewModel = function (e) {
-	google.maps.event.addDomListener(window, 'load', Initialize(e));
+	google.maps.event.addDomListener(window, 'load', new Initialize(e));
 
 	this.currentMap = ko.observable(new Initialize());
 	this.input = (ko.observable('Enter your city or address'));
