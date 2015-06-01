@@ -12,7 +12,6 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 		<style type="text/css">
 			html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
@@ -28,8 +27,7 @@
 			<![endif]-->
 
 
-<input id="pac-input" class="controls" type="text" placeholder="Enter your city or address" data-bind="textInput: input">
-<!-- <input id="pac-input" class="controls" data-bind="textInput: input"> -->
+<input id="pac-input" class="controls" type="text" data-bind="textInput: input">
 <div id="googleMap"></div>
 <div id="yelp-box" class="controls"></div>
 <div id="results">
