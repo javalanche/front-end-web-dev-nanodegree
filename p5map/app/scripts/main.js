@@ -8,23 +8,6 @@ var YWSID = 'tuoehBb1CHssBRwmS1Wt1Q'; // common required parameter (api key)
 var markers = [];
 
 
-/*
- * Called on the form submission: updates the map by
- * placing markers on it at the appropriate places
- */
-function updateMap(e) {
-
-	var yelpRequestURL = constructYelpURL(e);
-
-
-	/* do the api request */
-	var script = document.createElement('script');
-	script.src = yelpRequestURL;
-	script.type = 'text/javascript';
-	var head = document.getElementsByTagName('head').item(0);
-	head.appendChild(script);
-	return false;
-}
 
 /*
  * If a sucessful API response is received, place
@@ -110,7 +93,7 @@ function formatPhoneNumber(num) {
  * Creates a marker for the given business and point
  */
 function createMarker(biz, point, markerNum) {
-	var self = this;
+
 	var infoWindowHtml = generateInfoWindowHtml(biz);
 
 
@@ -163,7 +146,23 @@ function generateInfoWindowHtml(biz) {
 	return text;
 }
 
+/*
+ * Called on the form submission: updates the map by
+ * placing markers on it at the appropriate places
+ */
+function updateMap(e) {
 
+  var yelpRequestURL = constructYelpURL(e);
+
+
+  /* do the api request */
+  var script = document.createElement('script');
+  script.src = yelpRequestURL;
+  script.type = 'text/javascript';
+  var head = document.getElementsByTagName('head').item(0);
+  head.appendChild(script);
+  return false;
+}
 
 /*
  * Creates the map object and calls setCenterAndBounds
