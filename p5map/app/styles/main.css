@@ -95,7 +95,7 @@ body {
 	margin-left: 12px;
 	padding: 0 11px 0 13px;
 	text-overflow: ellipsis;
-	width: 400px;
+	width: 75vw;
 }
 
 #pac-input:focus {
@@ -114,9 +114,9 @@ div[style="transform: translateZ(0px)"]{
 	position: absolute;
 	right: 5px;
 	top: 50%;
-	margin-top: -195px;
-	height: 380px;
-	width: 200px;
+	margin-top: -10vh;
+	height: 36vh;
+	width: 17vw;
 	padding: 5px;
 	z-index: 5;
 	border: 1px solid #999;
@@ -128,9 +128,9 @@ div[style="transform: translateZ(0px)"]{
 	position: absolute;
 	right: 5px;
 	top: 50%;
-	margin-top: -378px;
-	height: 170px;
-	width: 369px;
+	margin-top: -333px;
+	height: 19vh;
+	width: 44vh;
 	padding: 5px;
 	z-index: 5;
 	border: 1px solid #999;
@@ -138,16 +138,20 @@ div[style="transform: translateZ(0px)"]{
 	display: none;
 }
 h2 {
-	font-size: 22px;
+	font-size: 4vw;
 	margin: 0 0 5px 0;
 }
 #places {
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
-	height: 321px;
-	width: 193px;
+	/*height: 321px;*/
+	height: 28vh;
+	/*height: 85%;*/
+	width: 17vw;
+	/*width: 193px;*/
 	overflow-y: scroll;
+	font-size: 2vw;
 }
 #places > li {
 	background-color: #f1f1f1;
