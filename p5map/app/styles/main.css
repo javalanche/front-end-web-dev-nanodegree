@@ -62,7 +62,9 @@ body {
 .marketing p + h4 {
 	margin-top: 28px;
 }
-
+.marker {
+	font-size: 1.5vh;
+}
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
 	.container {
@@ -126,11 +128,9 @@ div[style="transform: translateZ(0px)"]{
 #yelp-box {
 	font-family: Arial, Helvetica, sans-serif;
 	position: absolute;
-	right: 5px;
-	top: 50%;
-	margin-top: -333px;
-	height: 19vh;
-	width: 44vh;
+	right: 50%;
+	top: 70%;
+	margin-right: -10vw;
 	padding: 5px;
 	z-index: 5;
 	border: 1px solid #999;
@@ -145,11 +145,8 @@ h2 {
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
-	/*height: 321px;*/
 	height: 28vh;
-	/*height: 85%;*/
 	width: 17vw;
-	/*width: 193px;*/
 	overflow-y: scroll;
 	font-size: 2vw;
 }
@@ -180,8 +177,13 @@ html, body {width: 100%; height: 100%; font-family: arial;}
 #searchbox {text-align: center;}
 #poweredby { float: right; margin-right: 3px;}
 #poweredby img { vertical-align: baseline;}
-.marker {font-size: 11px;}
+
 .marker .businessimage { float: left;}
+.businessimage {
+  border: 0;
+  width: auto;
+  height: 100%;
+}
 .marker .ratingsimage {vertical-align:middle; margin-top:0px;}
 .marker .businessinfo { margin-left: 110px;}
 #googleMap { height: 100%; margin: 0; padding: 0;}
