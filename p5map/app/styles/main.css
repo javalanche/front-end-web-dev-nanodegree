@@ -187,3 +187,14 @@ html, body {width: 100%; height: 100%; font-family: arial;}
 .marker .ratingsimage {vertical-align:middle; margin-top:0px;}
 .marker .businessinfo { margin-left: 110px;}
 #googleMap { height: 100%; margin: 0; padding: 0;}
+#message-404{
+	display: none;
+	margin-left: auto;
+	margin-right: auto;
+	width: 700px;
+	background: #000;
+	padding: 20px;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+}

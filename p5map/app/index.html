@@ -13,20 +13,20 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <!-- endbuild -->
-		<style type="text/css">
-			html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
-		</style>
+	<style type="text/css">
+		html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+	</style>
 
-		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
-
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 
   </head>
 <body>
 		<!--[if lt IE 10]>
 		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 			<![endif]-->
-
-
+<div id="message-404">
+	<p>There is a problem with your internet connection. Please check your connection and reconnect to continue</p>
+</div>
 <input id="pac-input" class="controls" type="text" data-bind="textInput: input">
 <div id="googleMap"></div>
 <div id="yelp-box" class="controls"></div>
@@ -39,7 +39,7 @@
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
 <script src="bower_components/knockout/dist/knockout.js"></script>
-<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>  
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -51,14 +51,16 @@
 				e.src='//www.google-analytics.com/analytics.js';
 				r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
 		ga('create','UA-XXXXX-X');ga('send','pageview');
-	</script>
+</script>
 
-	<!-- build:js(.) scripts/plugins.js -->
-	<!-- endbuild -->
+<!-- build:js(.) scripts/plugins.js -->
+<!-- endbuild -->
 
-		<!-- build:js({app,.tmp}) scripts/main.js -->
-		 <script src="scripts/main.js"></script> 
-    <link rel="stylesheet" href="styles/main.css">
-		<!-- endbuild -->
+<!-- build:js({app,.tmp}) scripts/main.js -->
+<link rel="stylesheet" href="styles/main.css">
+ 	
+<script src="scripts/checkInternetConnection.js"></script>
+<script src="scripts/main.js"></script>
+<!-- endbuild -->
 </body>
 </html>
