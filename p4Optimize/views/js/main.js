@@ -378,6 +378,7 @@ var pizzaElementGenerator = function(i) {
   pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
   pizzaImageContainer.classList.add("col-md-6");
 
+//reduced original .png size from original
   pizzaImage.src = "images/pizza-reduced.png";
   pizzaImage.classList.add("img-responsive");
   pizzaImageContainer.appendChild(pizzaImage);
@@ -454,6 +455,7 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
+	//pulled all unnecessary variable declarations and assignments outside of for loop
 	  var pizzaContainerArray = document.querySelectorAll(".randomPizzaContainer");
 	  var dx = determineDx(pizzaContainerArray[0], size);
 	  var newwidth = (pizzaContainerArray[0].offsetWidth + dx) + 'px';
@@ -511,8 +513,12 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   var items = document.querySelectorAll('.mover');
+//pulled all unnecessary variable declarations and assignments outside of for loop and function
+  var phase;
+  var timesToUpdatePosition;
+  var scrollSpeed = document.body.scrollTop;
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    phase = Math.sin((scrollSpeed / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
@@ -521,7 +527,7 @@ function updatePositions() {
   window.performance.mark("mark_end_frame");
   window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
   if (frame % 10 === 0) {
-    var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
+    timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
     logAverageFrame(timesToUpdatePosition);
   }
 }
@@ -533,9 +539,11 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+// changed loops to 30 from 200. 200 loops was overkill and not necessary for 60fps
   for (var i = 0; i < 30; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
+//reduced size of original .png
     elem.src = "images/pizza-reduced.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
