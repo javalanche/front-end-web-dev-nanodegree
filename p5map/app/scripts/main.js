@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 var map;
 var currentMarkerPosition; // set static position for Yelp box
 var currentSelectedItem; // info for Yelp box
