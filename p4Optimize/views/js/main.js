@@ -539,8 +539,8 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-// changed loops to 30 from 200. 200 loops was overkill and not necessary for 60fps
-  for (var i = 0; i < 30; i++) {
+
+  for (var i = 0; i < 200; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
 //reduced size of original .png
