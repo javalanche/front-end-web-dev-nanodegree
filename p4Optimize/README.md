@@ -2,7 +2,7 @@
   1. start python simple http server
 
     ```bash
-    $> cd /front-end-web-dev-nanodegree/p4Optimize
+    $> cd front-end-web-dev-nanodegree/p4Optimize
     $> python -m SimpleHTTPServer 
     ```
     
