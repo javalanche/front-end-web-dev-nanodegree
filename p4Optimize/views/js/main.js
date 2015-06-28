@@ -456,7 +456,8 @@ var resizePizzas = function(size) {
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
 	//pulled all unnecessary variable declarations and assignments outside of for loop
-	  var pizzaContainerArray = document.querySelectorAll(".randomPizzaContainer");
+  // getElementsByClassName faster than querySelectorAll
+	  var pizzaContainerArray = document.getElementsByClassName("randomPizzaContainer");
 	  var dx = determineDx(pizzaContainerArray[0], size);
 	  var newwidth = (pizzaContainerArray[0].offsetWidth + dx) + 'px';
     for (var i = 0; i < pizzaContainerArray.length; i++) {
@@ -479,8 +480,9 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
-for (var i = 2; i < 100; i++) {
+  // pulled DOM call outside of loop, DOM call too costly in time
   var pizzasDiv = document.getElementById("randomPizzas");
+for (var i = 2; i < 100; i++) {
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -512,7 +514,8 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+  // getElementsByClassName faster than querySelectorAll
+  var items = document.getElementsByClassName('mover');
 //pulled all unnecessary variable declarations and assignments outside of for loop and function
   var phase;
   var timesToUpdatePosition;
@@ -540,8 +543,11 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
 
-  for (var i = 0; i < 200; i++) {
-    var elem = document.createElement('img');
+  // moved DOM call outside of for loop, too costly in time
+  var elem = document.createElement('img');
+
+  // 200 loops not necessary 48 covers most common screen resolutions
+  for (var i = 0; i < 48; i++) {
     elem.className = 'mover';
 //reduced size of original .png
     elem.src = "images/pizza-reduced.png";
