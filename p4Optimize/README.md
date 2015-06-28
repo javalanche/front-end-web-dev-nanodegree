@@ -2,12 +2,12 @@
   1. start python simple http server
 
     ```bash
-    $> cd /front-end-web-dev-nanodegree/p4Optimize
+    $> cd front-end-web-dev-nanodegree/p4Optimize
     $> python -m SimpleHTTPServer 
     ```
     
   2. enter the following URL into webbrowser: localhost:8000 (this is the un-minified and un-uglified version)
-  3. enter the following URL into webbrowser: localhost:8000/dist (this is the un-minified and un-uglified version)
+  3. enter the following URL into webbrowser: localhost:8000/dist (this is the minified and uglified version)
 
 
 ### PROJECT COMPLETE ACCORDING TO RUBRIC
