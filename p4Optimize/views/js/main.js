@@ -543,7 +543,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
 
-  // moved DOM call outside of for loop, too costly in time
+  // moved declaration of elem outside of loop
   var elem;
 
   // 200 loops not necessary 48 covers most common screen resolutions
