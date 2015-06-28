@@ -544,10 +544,11 @@ document.addEventListener('DOMContentLoaded', function() {
   var s = 256;
 
   // moved DOM call outside of for loop, too costly in time
-  var elem = document.createElement('img');
+  var elem;
 
   // 200 loops not necessary 48 covers most common screen resolutions
   for (var i = 0; i < 48; i++) {
+    elem = document.createElement('img');
     elem.className = 'mover';
 //reduced size of original .png
     elem.src = "images/pizza-reduced.png";
